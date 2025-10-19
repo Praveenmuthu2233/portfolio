@@ -62,3 +62,23 @@ document.getElementById("downloadBtn").addEventListener("click", function() {
     link.download = "PraveenResume.pdf"; 
     link.click();
 });
+
+function showPopup(message) {
+    const popup = document.getElementById("popup");
+    const popupMessage = document.getElementById("popup-message");
+    
+    popupMessage.textContent = message;
+    popup.style.display = "block";
+
+    // Close when clicking the "X"
+    document.getElementById("popup-close").onclick = () => {
+        popup.style.display = "none";
+    };
+
+    // Close when clicking outside the popup
+    window.onclick = (event) => {
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+}

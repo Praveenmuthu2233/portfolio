@@ -187,6 +187,13 @@
                     </a>
                 </div>
             </section>
+            <!-- Popup Container -->
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <span id="popup-close" class="popup-close">&times;</span>
+                    <p id="popup-message"></p>
+                </div>
+            </div>
 
             <!--===== CONTACT =====-->
             <section class="contact section" id="contact">
@@ -262,17 +269,16 @@
                 from_name: "Praveen Portfolio",
                 message: "✅ Thank you for contacting me! Your message has been received successfully."
             };
-
             try {
                 await emailjs.send("service_ywza5vm", "template_pqwnupm", adminParams);
-
                 await emailjs.send("service_ywza5vm", "template_pqwnupm", userParams);
 
-                alert("✅ Message sent successfully!");
+                showPopup(`✅ Thank you, ${name}! Your message has been sent successfully`);
+
                 document.getElementById("contactForm").reset();
             } catch (error) {
                 console.error("❌ EmailJS Error:", error);
-                alert("❌ Failed to send message. Please try again later.");
+                showPopup(`❌ Sorry, ${name}. Your message could not be sent. Please try again later.`);
             }
         }
         </script>
