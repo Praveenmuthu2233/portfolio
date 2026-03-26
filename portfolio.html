@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Praveen Muthu V — Freelance Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #18181f;
+    --border: rgba(255,255,255,0.07);
+    --accent: #7c5cfc;
+    --accent2: #e05aff;
+    --accent3: #00e5c0;
+    --text: #f0eeff;
+    --muted: #7a789a;
+    --card: #13131c;
+    --glow: 0 0 40px rgba(124,92,252,0.18);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+ 
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+ 
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 4vw;
+    background: rgba(10,10,15,0.75);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex; gap: 2.2rem; list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0; right: 0;
+    height: 1.5px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.25s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+ 
+  .hamburger {
+    display: none;
+    flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 4px;
+  }
+  .hamburger span {
+    width: 22px; height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed; inset: 0; top: 62px;
+    background: rgba(10,10,15,0.97);
+    backdrop-filter: blur(20px);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--accent); }
+ 
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4vw 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%; left: -10%;
+    width: 60vw; height: 60vw;
+    background: radial-gradient(circle, rgba(124,92,252,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -15%; right: -5%;
+    width: 45vw; height: 45vw;
+    background: radial-gradient(circle, rgba(224,90,255,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(124,92,252,0.1);
+    border: 1px solid rgba(124,92,252,0.3);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent3);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 .gradient-text {
+    background: linear-gradient(135deg, var(--accent), var(--accent2) 50%, var(--accent3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-desc {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 460px;
+    margin-bottom: 2.2rem;
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.75rem 1.8rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.25s;
+    border: none; cursor: pointer;
+    box-shadow: 0 4px 20px rgba(124,92,252,0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(124,92,252,0.45);
+  }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.75rem 1.8rem;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+  .btn-ghost:hover {
+    border-color: rgba(124,92,252,0.5);
+    background: rgba(124,92,252,0.07);
+  }
+ 
+  .hero-social {
+    display: flex; gap: 1rem;
+    margin-top: 2rem;
+  }
+  .social-link {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    color: var(--muted);
+    transition: all 0.2s;
+    font-size: 0.9rem;
+  }
+  .social-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(124,92,252,0.1);
+    transform: translateY(-2px);
+  }
+ 
+  /* HERO IMAGE */
+  .hero-img-wrap {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-img-frame {
+    position: relative;
+    width: min(380px, 85vw);
+    aspect-ratio: 1;
+  }
+  .hero-img-frame::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+    z-index: -1;
+  }
+  .hero-img-frame::after {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 40px;
+    background: radial-gradient(circle, rgba(124,92,252,0.2) 0%, transparent 70%);
+    z-index: -2;
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.3; }
+  }
+  .hero-img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 26px;
+    display: block;
+  }
+  .hero-stats {
+    position: absolute;
+    bottom: -1.5rem; left: -1.5rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0.85rem 1.2rem;
+    display: flex; gap: 1.8rem;
+    backdrop-filter: blur(12px);
+    box-shadow: var(--glow);
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+ 
+  /* SECTIONS */
+  section { padding: 6rem 4vw; }
+  .section-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+  .section-sub {
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 3rem;
+    font-size: 1rem;
+  }
+ 
+  /* ABOUT */
+  #about { background: var(--surface); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .about-img-wrap { position: relative; }
+  .about-img-inner {
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    position: relative;
+  }
+  .about-img-inner img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(10%);
+  }
+  .about-img-inner::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,10,15,0.5) 0%, transparent 50%);
+  }
+  .about-badge {
+    position: absolute;
+    top: 1.5rem; right: -1.5rem;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    writing-mode: vertical-rl;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .about-content h2 { margin-bottom: 1.2rem; }
+  .about-content p {
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    font-size: 0.97rem;
+  }
+  .about-skills {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    margin-top: 2rem;
+  }
+  .skill-tag {
+    background: rgba(124,92,252,0.1);
+    border: 1px solid rgba(124,92,252,0.25);
+    color: var(--accent);
+    padding: 0.3rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover {
+    background: rgba(124,92,252,0.2);
+    transform: translateY(-1px);
+  }
+ 
+  /* SERVICES */
+  #services { position: relative; overflow: hidden; }
+  #services::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw; height: 80vw;
+    background: radial-gradient(circle, rgba(0,229,192,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(124,92,252,0.3);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3), var(--glow);
+  }
+  .service-icon {
+    width: 50px; height: 50px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+  .service-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .service-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; }
+ 
+  /* PROJECTS */
+  #projects { background: var(--surface); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    transition: all 0.3s;
+    display: flex; flex-direction: column;
+    gap: 1rem;
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(124,92,252,0.3);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+  .project-header {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 1rem;
+  }
+  .project-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: rgba(124,92,252,0.12);
+    border: 1px solid rgba(124,92,252,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .project-links { display: flex; gap: 0.5rem; }
+  .project-link {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+  .project-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .project-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .project-card p { color: var(--muted); font-size: 0.85rem; flex: 1; }
+  .project-techs {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .tech-tag {
+    background: rgba(0,229,192,0.08);
+    border: 1px solid rgba(0,229,192,0.2);
+    color: var(--accent3);
+    padding: 0.2rem 0.65rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+ 
+  /* YOUTUBE */
+  #youtube { position: relative; overflow: hidden; }
+  .yt-banner {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .yt-banner::before {
+    content: '';
+    position: absolute; top: -50%; right: -10%;
+    width: 50%; height: 200%;
+    background: radial-gradient(circle, rgba(255,0,0,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .yt-label {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(255,0,0,0.1);
+    border: 1px solid rgba(255,0,0,0.2);
+    color: #ff4545;
+    border-radius: 100px;
+    padding: 0.3rem 1rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .yt-banner h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .yt-banner p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.8rem; }
+  .yt-subscribe {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: #ff0000;
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .yt-subscribe:hover {
+    background: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255,0,0,0.3);
+  }
+  .yt-visual {
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .yt-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    display: flex; align-items: center; gap: 1rem;
+    transition: all 0.2s;
+  }
+  .yt-card:hover { border-color: rgba(255,0,0,0.2); }
+  .yt-thumb {
+    width: 56px; height: 40px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ff4545, #ff0000);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .yt-info h4 { font-size: 0.82rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .yt-info span { font-size: 0.72rem; color: var(--muted); }
+ 
+  /* CONTACT */
+  #contact { background: var(--surface); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-info h2 { margin-bottom: 1rem; }
+  .contact-info p { color: var(--muted); margin-bottom: 2rem; font-size: 0.97rem; }
+  .contact-items { display: flex; flex-direction: column; gap: 1.2rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .contact-item-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: rgba(124,92,252,0.1);
+    border: 1px solid rgba(124,92,252,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .contact-item-text span {
+    display: block;
+    font-size: 0.73rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.1rem;
+  }
+  .contact-item-text a, .contact-item-text p {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .contact-item-text a:hover { color: var(--accent); }
+ 
+  /* FORM */
+  .contact-form {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+  }
+  .contact-form h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.8rem;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .form-group label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+    outline: none;
+    resize: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(124,92,252,0.1);
+  }
+  .form-group select option { background: var(--surface); }
+  .form-group textarea { min-height: 120px; }
+  .form-status {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    display: none;
+  }
+  .form-status.success {
+    background: rgba(0,229,192,0.1);
+    border: 1px solid rgba(0,229,192,0.3);
+    color: var(--accent3);
+    display: block;
+  }
+  .form-status.error {
+    background: rgba(255,80,80,0.1);
+    border: 1px solid rgba(255,80,80,0.3);
+    color: #ff8080;
+    display: block;
+  }
+ 
+  /* FOOTER */
+  footer {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 4vw;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+  }
+  .footer-copy { color: var(--muted); font-size: 0.82rem; }
+  .footer-links {
+    display: flex; gap: 1.5rem;
+  }
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.83rem;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--text); }
+ 
+  /* SCROLL INDICATOR */
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    z-index: 9998;
+    transition: width 0.1s;
+  }
+ 
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-up:nth-child(2) { transition-delay: 0.1s; }
+  .fade-up:nth-child(3) { transition-delay: 0.2s; }
+  .fade-up:nth-child(4) { transition-delay: 0.3s; }
+ 
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .services-grid,
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero { grid-template-columns: 1fr; padding-top: 7rem; }
+    .hero-img-wrap { order: -1; }
+    .hero-img-frame { width: min(300px, 80vw); }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-img-wrap { display: none; }
+    .yt-banner { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 1rem 5vw; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .services-grid,
+    .projects-grid { grid-template-columns: 1fr; }
+    .hero { text-align: center; padding: 6.5rem 5vw 3rem; }
+    .hero-desc { margin: 0 auto 2rem; }
+    .hero-cta { justify-content: center; }
+    .hero-social { justify-content: center; }
+    .hero-stats { left: 50%; transform: translateX(-50%); bottom: -1rem; white-space: nowrap; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    section { padding: 4rem 5vw; }
+    .yt-banner { padding: 2rem; }
+    .contact-form { padding: 1.8rem; }
+    .about-badge { display: none; }
+  }
+</style>
+</head>
+<body>
+ 
+<div class="scroll-progress" id="scrollProgress"></div>
+ 
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">Praveen</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#youtube">YouTube</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+ 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#projects" onclick="toggleMenu()">Projects</a>
+  <a href="#youtube" onclick="toggleMenu()">YouTube</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+ 
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">Available for Freelance Work</div>
+    <h1>
+      Hi, I'm<br/>
+      <span class="gradient-text">Praveen Muthu V</span>
+    </h1>
+    <p class="hero-desc">
+      Freelance Developer & Content Creator. I craft clean, performant web applications and share knowledge through code tutorials on YouTube.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Hire Me
+      </a>
+      <a href="#projects" class="btn-ghost">
+        View Projects
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-social">
+      <a href="https://www.linkedin.com/in/praveenmuthu-v/" target="_blank" class="social-link" title="LinkedIn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://github.com/Praveenmuthu2233" target="_blank" class="social-link" title="GitHub">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@CodeLoop-SP" target="_blank" class="social-link" title="YouTube">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0a0a0f"/></svg>
+      </a>
+      <a href="mailto:praveenmuthu9500@gmail.com" class="social-link" title="Email">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hero-img-wrap">
+    <div class="hero-img-frame">
+      <img src="https://lh3.googleusercontent.com/d/17q2QExiNS64FpefyZFZ_wMyDah11JWZJ=s800" alt="Praveen Muthu V" onerror="this.src='https://ui-avatars.com/api/?name=Praveen+Muthu&background=7c5cfc&color=fff&size=400&bold=true&font-size=0.35'"/>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">12+</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">1+</div>
+          <div class="stat-label">Years Exp</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Passion</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap fade-up">
+      <div class="about-img-inner">
+        <img src="https://lh3.googleusercontent.com/d/17q2QExiNS64FpefyZFZ_wMyDah11JWZJ=s800" alt="Praveen Muthu V" onerror="this.src='https://ui-avatars.com/api/?name=PM&background=7c5cfc&color=fff&size=600&bold=true'"/>
+      </div>
+      <div class="about-badge">Developer</div>
+    </div>
+    <div class="about-content fade-up">
+      <span class="section-tag">About Me</span>
+      <h2 class="section-title">Freelance Developer based in Chennai</h2>
+      <p>
+        I'm <strong style="color:var(--text)">Praveen Muthu V</strong>, a passionate freelance developer from Chennai, Tamil Nadu. I specialize in building robust web applications and digital experiences that solve real-world problems.
+      </p>
+      <p>
+        With hands-on experience in Java, web development, and full-stack projects, I enjoy turning complex requirements into simple, beautiful, and intuitive solutions. Whether you need a business website, a management system, or a custom application — I've got you covered.
+      </p>
+      <p>
+        Beyond coding, I run <strong style="color:var(--text)">CodeLoop</strong> on YouTube where I break down programming concepts, project walkthroughs, and tech tutorials for the community.
+      </p>
+      <div class="about-skills">
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">HTML/CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Spring Boot</span>
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Git & GitHub</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">Responsive Design</span>
+      </div>
+      <div style="margin-top:2rem">
+        <a href="mailto:praveenmuthu9500@gmail.com" class="btn-primary">Let's Work Together</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- SERVICES -->
+<section id="services">
+  <span class="section-tag">What I Do</span>
+  <h2 class="section-title">Services I Offer</h2>
+  <p class="section-sub">From concept to deployment — I provide end-to-end development solutions tailored to your needs.</p>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="service-icon" style="background:rgba(124,92,252,0.12);border:1px solid rgba(124,92,252,0.2)">🌐</div>
+      <h3>Web Development</h3>
+      <p>Responsive, fast-loading websites and web applications built with modern technologies. Clean code, mobile-first approach.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon" style="background:rgba(0,229,192,0.1);border:1px solid rgba(0,229,192,0.2)">⚙️</div>
+      <h3>Backend Development</h3>
+      <p>Robust server-side solutions using Java & Spring Boot, REST APIs, database design, and system architecture.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon" style="background:rgba(224,90,255,0.1);border:1px solid rgba(224,90,255,0.2)">📱</div>
+      <h3>Frontend / UI Design</h3>
+      <p>Clean and modern user interfaces built with HTML, CSS, JavaScript, and React. Pixel-perfect, responsive layouts.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon" style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.2)">🗄️</div>
+      <h3>Database Design</h3>
+      <p>Efficient database schemas, query optimization, and data modeling with MySQL and other relational databases.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon" style="background:rgba(255,69,69,0.1);border:1px solid rgba(255,69,69,0.2)">🎥</div>
+      <h3>Tech Content Creation</h3>
+      <p>Educational coding tutorials and project walkthroughs for developers on my YouTube channel CodeLoop.</p>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon" style="background:rgba(100,200,255,0.1);border:1px solid rgba(100,200,255,0.2)">🔧</div>
+      <h3>Freelance Consulting</h3>
+      <p>Technical guidance, code reviews, architecture consultations, and helping you make the right technology choices.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- PROJECTS -->
+<section id="projects">
+  <span class="section-tag">Portfolio</span>
+  <h2 class="section-title">Featured Projects</h2>
+  <p class="section-sub">A selection of projects I've built — ranging from management systems to web applications.</p>
+  <div class="projects-grid">
+    <div class="project-card fade-up">
+      <div class="project-header">
+        <div class="project-icon">📚</div>
+        <div class="project-links">
+          <a href="https://github.com/Praveenmuthu2233/student-management-system" target="_blank" class="project-link" title="GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+      <h3>Student Management System</h3>
+      <p>A comprehensive system to manage student records, attendance, grades, and administrative tasks built with Java.</p>
+      <div class="project-techs">
+        <span class="tech-tag">Java</span>
+        <span class="tech-tag">MySQL</span>
+        <span class="tech-tag">JDBC</span>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-header">
+        <div class="project-icon">☕</div>
+        <div class="project-links">
+          <a href="https://github.com/Praveenmuthu2233/Java-project" target="_blank" class="project-link" title="GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+      <h3>Java Project</h3>
+      <p>A feature-rich Java application demonstrating core programming concepts, OOP principles, and practical implementation.</p>
+      <div class="project-techs">
+        <span class="tech-tag">Java</span>
+        <span class="tech-tag">OOP</span>
+        <span class="tech-tag">Data Structures</span>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-header">
+        <div class="project-icon">🏍️</div>
+        <div class="project-links">
+          <a href="https://github.com/Praveenmuthu2233/Bike-Selling-site" target="_blank" class="project-link" title="GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+      <h3>Bike Selling Site</h3>
+      <p>A dynamic e-commerce style website for browsing and selling bikes with interactive UI components.</p>
+      <div class="project-techs">
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-header">
+        <div class="project-icon">👗</div>
+        <div class="project-links">
+          <a href="https://github.com/Praveenmuthu2233/Female-fashion-web" target="_blank" class="project-link" title="GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+      <h3>Female Fashion Website</h3>
+      <p>A modern fashion web store with elegant design, product listings, and responsive layout targeting female fashion enthusiasts.</p>
+      <div class="project-techs">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-header">
+        <div class="project-icon">💼</div>
+        <div class="project-links">
+          <a href="https://github.com/Praveenmuthu2233/vCard" target="_blank" class="project-link" title="GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+      <h3>vCard Portfolio</h3>
+      <p>A digital vCard-style personal portfolio website showcasing professional information and contact details in a clean format.</p>
+      <div class="project-techs">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+      </div>
+    </div>
+    <div class="project-card fade-up">
+      <div class="project-header">
+        <div class="project-icon">🚀</div>
+        <div class="project-links">
+          <a href="https://github.com/Praveenmuthu2233/portfolio" target="_blank" class="project-link" title="GitHub">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </div>
+      </div>
+      <h3>Portfolio Website</h3>
+      <p>Personal portfolio website built from scratch showcasing projects, skills, and experience with a modern design approach.</p>
+      <div class="project-techs">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">JavaScript</span>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.5rem">
+    <a href="https://github.com/Praveenmuthu2233" target="_blank" class="btn-ghost">
+      View All on GitHub
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+ 
+<!-- YOUTUBE -->
+<section id="youtube">
+  <span class="section-tag">Content Creation</span>
+  <h2 class="section-title">Watch on YouTube</h2>
+  <p class="section-sub">I share programming tutorials, project builds, and tech insights on my channel CodeLoop.</p>
+  <div class="yt-banner fade-up">
+    <div>
+      <div class="yt-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="rgba(255,0,0,0.2)"/></svg>
+        YouTube Channel
+      </div>
+      <h2>CodeLoop <span style="color:var(--accent)">by Praveen</span></h2>
+      <p>Programming tutorials, full-stack project builds, Java lessons, and web development walkthroughs. Learning made simple — loop by loop.</p>
+      <a href="https://www.youtube.com/@CodeLoop-SP" target="_blank" class="yt-subscribe">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff"/></svg>
+        Subscribe Now
+      </a>
+    </div>
+    <div class="yt-visual">
+      <div class="yt-card">
+        <div class="yt-thumb">▶</div>
+        <div class="yt-info">
+          <h4>Java Full Project Walkthrough</h4>
+          <span>CodeLoop • Programming Tutorial</span>
+        </div>
+      </div>
+      <div class="yt-card">
+        <div class="yt-thumb">▶</div>
+        <div class="yt-info">
+          <h4>Building Web Apps from Scratch</h4>
+          <span>CodeLoop • Web Development</span>
+        </div>
+      </div>
+      <div class="yt-card">
+        <div class="yt-thumb">▶</div>
+        <div class="yt-info">
+          <h4>Student Management System — Full Build</h4>
+          <span>CodeLoop • Java Project</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-title">Let's Build Something Together</h2>
+      <p>Have a project in mind? Looking for a freelance developer? Or just want to connect? I'd love to hear from you!</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon">📧</div>
+          <div class="contact-item-text">
+            <span>Email</span>
+            <a href="mailto:praveenmuthu9500@gmail.com">praveenmuthu9500@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div class="contact-item-text">
+            <span>Phone</span>
+            <a href="tel:+919500206518">+91 9500206518</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-text">
+            <span>Location</span>
+            <p>Chennai, Tamil Nadu, India</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">💼</div>
+          <div class="contact-item-text">
+            <span>LinkedIn</span>
+            <a href="https://www.linkedin.com/in/praveenmuthu-v/" target="_blank">linkedin.com/in/praveenmuthu-v</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">💻</div>
+          <div class="contact-item-text">
+            <span>GitHub</span>
+            <a href="https://github.com/Praveenmuthu2233" target="_blank">github.com/Praveenmuthu2233</a>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="contact-form fade-up">
+      <h3>Send Me a Message</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" id="name" placeholder="John Doe" />
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="email" placeholder="john@example.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Subject *</label>
+        <select id="subject">
+          <option value="">Select a subject...</option>
+          <option>Freelance Project</option>
+          <option>Web Development</option>
+          <option>Collaboration</option>
+          <option>Consultation</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Message *</label>
+        <textarea id="message" placeholder="Tell me about your project or inquiry..."></textarea>
+      </div>
+      <button class="btn-primary" onclick="submitForm()" style="width:100%;justify-content:center" id="submitBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Send Message
+      </button>
+      <div class="form-status" id="formStatus"></div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <a href="#home" class="footer-logo">Praveen Muthu V</a>
+  <p class="footer-copy">© 2026 Praveen Muthu V, Freelance Developer & Creator.</p>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/praveenmuthu-v/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Praveenmuthu2233" target="_blank">GitHub</a>
+    <a href="https://www.youtube.com/@CodeLoop-SP" target="_blank">YouTube</a>
+    <a href="mailto:praveenmuthu9500@gmail.com">Email</a>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  // Scroll progress
+  window.addEventListener('scroll', () => {
+    const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('scrollProgress').style.width = scrolled + '%';
+  });
+ 
+  // Mobile menu
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+ 
+  // Intersection Observer for fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+ 
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  (function(){
+    emailjs.init("9tbKnoM6BDPL01Yx5");
+  })();
+
+  function submitForm() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value.trim();
+    const status = document.getElementById('formStatus');
+    const btn = document.getElementById('submitBtn');
+
+    if (!name || !email || !subject || !message) {
+      status.className = 'form-status error';
+      status.textContent = '⚠️ Please fill in all required fields.';
+      return;
+    }
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    emailjs.send("service_ywza5vm", "template_pqwnupm", {
+      from_name: name,
+      reply_to: email,
+      subject: subject,
+      message: message
+    })
+    .then(() => {
+
+      setTimeout(() => {
+        status.className = 'form-status success';
+        status.textContent = '✅ Message sent successfully!';
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Sent!';
+        btn.disabled = false;
+      }, 800);
+
+    })
+    .catch((error) => {
+      console.log(error);
+
+      status.className = 'form-status error';
+      status.textContent = '❌ Failed to send message. Try again.';
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+    });
+  }
+  // // Form submission
+  // function submitForm() {
+  //   const name = document.getElementById('name').value.trim();
+  //   const email = document.getElementById('email').value.trim();
+  //   const subject = document.getElementById('subject').value;
+  //   const message = document.getElementById('message').value.trim();
+  //   const status = document.getElementById('formStatus');
+  //   const btn = document.getElementById('submitBtn');
+ 
+  //   if (!name || !email || !subject || !message) {
+  //     status.className = 'form-status error';
+  //     status.textContent = '⚠️ Please fill in all required fields.';
+  //     return;
+  //   }
+ 
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   if (!emailRegex.test(email)) {
+  //     status.className = 'form-status error';
+  //     status.textContent = '⚠️ Please enter a valid email address.';
+  //     return;
+  //   }
+ 
+  //   btn.textContent = 'Sending...';
+  //   btn.disabled = true;
+ 
+  //   // Using mailto as the backend — opens email client pre-filled
+  //   const mailto = `mailto:praveenmuthu9500@gmail.com?subject=${encodeURIComponent(`[Portfolio] ${subject} - from ${name}`)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`)}`;
+  //   window.location.href = mailto;
+ 
+  //   setTimeout(() => {
+  //     status.className = 'form-status success';
+  //     status.textContent = '✅ Your email client has opened! If not, please email praveenmuthu9500@gmail.com directly.';
+  //     btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Sent!';
+  //     btn.disabled = false;
+  //   }, 800);
+  // }
+ 
+  // Smooth active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
+    });
+  });
+</script>
+</body>
+</html>
